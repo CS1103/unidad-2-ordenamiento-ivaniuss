@@ -7,23 +7,16 @@
 #include "Sort.h"
 #include "definiciones.h"
 
-int main(){
+int main(void)
+{
+    std::vector<int> arr {5, 12, 11, 5, 4, 3, 2, 1, 6};
 
-    std::vector<int> vec1 = {9,8,7,6,5,4,3,2,1,0};
-    Sort <int> A(vec1);
-    A.print();
+    merge_sort(arr.begin(), arr.end());
 
-
-
-
-    std::cout<<std::fixed<<std::setprecision(6)<<std::endl;
-
-    A.print();
-
-//utilizar iteradores
-//necesita recibir archivos
-
-
+    for(auto const &i : arr) {
+        std::cout << ' ' << i;
+    }
+    std::cout << '\n';
 
     return 0;
 }
