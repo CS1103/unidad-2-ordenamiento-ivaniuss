@@ -5,7 +5,7 @@
 #include <deque>
 #include <list>
 #include "Sort.h"
-#include "definiciones.h"
+
 
 int main(void)
 {
