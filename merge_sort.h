@@ -5,67 +5,48 @@
 #ifndef SORTMETHODS_MERGE_SORT_H
 #define SORTMETHODS_MERGE_SORT_H
 
+
+#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <iterator>
+
+template <typename It>
+void merge(It left, It middle, It right)
+{
+    using value_type = typename std::iterator_traits<It>::value_type;
+    std::vector<value_type> left_side_copy(left, middle);
+    It L = left_side_copy.begin();
+    It R = middle;
+    while (L != left_side_copy.end()  &&  R != right)
+    {
+        if ( *L <= *R )
+        {
+            *left = *L;
+            ++L;
+        }
+        else {
+            *left = *R;
+            ++R;
+        }
+        ++left;
+    }
+    std::copy(L, left_side_copy.end(), left);
+}
+
+template <typename It>
+void merge_sort(It left, It right)
+{
+    if (auto dist = std::distance(left, right); dist > 1)
+    {
+        It middle = left + dist / 2;
+        merge_sort(left, middle);
+        merge_sort(middle, right);
+        merge(left, middle, right);
+    }
+}
+
+
 #endif //SORTMETHODS_MERGE_SORT_H
 
 
-#include <vector>
-#include <iostream>
-
-using namespace std;
-
-template<typename T>
-int Merge(T A[],int p, int q,int r)
-{
-
-    int n1,n2,i,j,k;
-
-    n1=q-p+1;
-    n2=r-q;
-    int L[n1],R[n2];
-
-    for(i=0;i<n1;i++)
-    {
-        L[i]=A[p+i];
-    }
-
-    for(j=0;j<n2;j++)
-    {
-        R[j]=A[q+j+1];
-    }
-    i=0,j=0;
-
-    for(k=p;i<n1&&j<n2;k++)
-    {
-        if(L[i]<R[j])
-        {
-            A[k]=L[i++];
-        }
-        else
-        {
-            A[k]=R[j++];
-        }
-    }
-
-    while(i<n1)
-    {
-        A[k++]=L[i++];
-    }
-
-    while(j<n2)
-    {
-        A[k++]=R[j++];
-    }
-}
-}
-template<typename T>
-int MergeSort(T A[],int p,int r)
-{
-    int q;
-    if(p<r)
-    {
-        q=(p+r)/2;
-        MergeSort(A,p,q);
-        MergeSort(A,q+1,r);
-        Merge(A,p,q,r);
-    }
-}
