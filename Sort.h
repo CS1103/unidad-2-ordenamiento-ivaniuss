@@ -30,5 +30,5 @@ public:
     void HeapSort();
     void ShellSort();
     void print();
-   std::vector<T> values;
+
 };
